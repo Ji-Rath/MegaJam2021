@@ -1,0 +1,13 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "4.26",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "MegaJam2021",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
