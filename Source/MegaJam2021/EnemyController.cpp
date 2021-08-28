@@ -37,7 +37,7 @@ void AEnemyController::PerceptionUpdated(AActor* Actor, FAIStimulus Stimulus)
 		{
 			PlayerReference = Actor;
 			SetState(Chasing);
-			GetBlackboardComponent()->SetValueAsObject(BBPlayerReference, Actor);
+			GetBlackboardComponent()->SetValueAsObject(BBPlayerReference, PlayerReference);
 
 			// Clear timer that would cause the enemy to automatically search
 			if (GetWorldTimerManager().IsTimerActive(ForgetTargetTimer))
