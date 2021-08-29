@@ -20,6 +20,7 @@ void AEnemyController::BeginPlay()
 	// Bind perception update function to delegate
 	GetPerceptionComponent()->OnTargetPerceptionUpdated.AddDynamic(this, &AEnemyController::PerceptionUpdated);
 
+	// Teams setup
 	SetGenericTeamId(FGenericTeamId(TeamID));
 }
 
@@ -57,15 +58,16 @@ void AEnemyController::PerceptionUpdated(AActor* Actor, FAIStimulus Stimulus)
 		}
 	}
 
+	/** Hearing stimulus */
 	if (SenseID == HearingID)
 	{
 		if (EnemyState == Idle || EnemyState == Searching)
 		{
+			/** Investigate stimulus location if not chasing the player already */
 			SetState(Searching);
 			GetBlackboardComponent()->SetValueAsVector(BBDestination, Stimulus.StimulusLocation);
 			GetBlackboardComponent()->SetValueAsVector(BBSearchLocation, Stimulus.StimulusLocation);
 		}
-		
 	}
 }
 
