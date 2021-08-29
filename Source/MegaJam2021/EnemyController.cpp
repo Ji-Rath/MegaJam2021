@@ -5,6 +5,7 @@
 #include "Perception/AIPerceptionComponent.h"
 #include "Perception/AIPerceptionTypes.h"
 #include "Perception/AISense_Sight.h"
+#include "Perception/AISense_Hearing.h"
 #include "BehaviorTree/BlackboardComponent.h"
 
 AEnemyController::AEnemyController()
@@ -18,6 +19,8 @@ void AEnemyController::BeginPlay()
 
 	// Bind perception update function to delegate
 	GetPerceptionComponent()->OnTargetPerceptionUpdated.AddDynamic(this, &AEnemyController::PerceptionUpdated);
+
+	SetGenericTeamId(FGenericTeamId(TeamID));
 }
 
 void AEnemyController::Tick(float DeltaTime)
@@ -29,6 +32,7 @@ void AEnemyController::PerceptionUpdated(AActor* Actor, FAIStimulus Stimulus)
 {
 	const FAISenseID SenseID = Stimulus.Type;
 	const FAISenseID SightID = UAISense::GetSenseID(UAISense_Sight::StaticClass());
+	const FAISenseID HearingID = UAISense::GetSenseID(UAISense_Hearing::StaticClass());
 	
 	/** Sight stimulus */
 	if (SenseID == SightID)
@@ -50,6 +54,16 @@ void AEnemyController::PerceptionUpdated(AActor* Actor, FAIStimulus Stimulus)
 			FTimerDelegate TimerDelegate;
 			TimerDelegate.BindUFunction(this, FName("SetState"), Searching);
 			GetWorldTimerManager().SetTimer(ForgetTargetTimer, TimerDelegate, ForgetTargetTime, false);
+		}
+	}
+
+	if (SenseID == HearingID)
+	{
+		if (EnemyState == Idle || EnemyState == Searching)
+		{
+			SetState(Searching);
+			GetBlackboardComponent()->SetValueAsVector(BBDestination, Stimulus.StimulusLocation);
+			GetBlackboardComponent()->SetValueAsVector(BBSearchLocation, Stimulus.StimulusLocation);
 		}
 		
 	}
@@ -77,4 +91,14 @@ void AEnemyController::SetState(EEnemyState NewState)
 UAIPerceptionComponent* AEnemyController::GetPerceptionComponent()
 {
 	return AIPerceptionComponent;
+}
+
+void AEnemyController::SetGenericTeamId(const FGenericTeamId& NewTeamID)
+{
+	Team = TeamID;
+}
+
+FGenericTeamId AEnemyController::GetGenericTeamId() const
+{
+	return Team;
 }

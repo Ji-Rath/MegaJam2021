@@ -39,38 +39,35 @@ public:
 	void PerceptionUpdated(AActor* Actor, FAIStimulus Stimulus);
 
 	/** The current state of the enemy */
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(VisibleAnywhere, Category = "AI")
 	TEnumAsByte<EEnemyState> EnemyState;
 
 	/** String reference to BB Vector. Intended to guide AI to stimulus */
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
 	FName BBDestination;
 
 	/** String reference to BB Vector. Intended for searching an area */
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
 	FName BBSearchLocation;
 
 	/** String reference to BB enum. Used to manage AI state */
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
 	FName BBEnemyState;
 
 	/** String reference to BB enum. Used to manage AI state */
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
 	FName BBPlayerReference;
 
-	/** Distance required from player to begin chasing */
-	UPROPERTY(EditDefaultsOnly)
-	float AlertDistance = 500.f;
-
-	UFUNCTION()
+	/** Update the state of the enemy */
+	UFUNCTION(BlueprintCallable, Category = "AI")
 	void SetState(EEnemyState NewState);
 
 	/** Time it takes to 'lose' the target and begin searching */
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "AI")
 	float ForgetTargetTime = 5.f;
 
 	/** Time it takes for the enemy to give up on searching for the player */
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "AI")
 	float StopSearchingTime = 10.f;
 
 	UAIPerceptionComponent* GetPerceptionComponent() override;
@@ -81,10 +78,20 @@ public:
 	UPROPERTY(BlueprintAssignable)
 	FStateUpdated OnStateUpdated;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Team")
+	uint8 TeamID = FGenericTeamId::NoTeam;
+
 private:
 	UPROPERTY()
 	AActor* PlayerReference;
 
 	UPROPERTY()
 	FTimerHandle ForgetTargetTimer;
+
+	void SetGenericTeamId(const FGenericTeamId& NewTeamID) override;
+
+	FGenericTeamId GetGenericTeamId() const override;
+
+	FGenericTeamId Team;
+
 };
