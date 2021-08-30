@@ -1,0 +1,128 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "MegaJam2021 (Debug)",
+			"request": "launch",
+			"preLaunchTask": "MegaJam2021 Win64 Debug Build",
+			"program": "C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\Binaries\\Win64\\UE4-Win64-Debug.exe",
+			"args": [
+			],
+			"cwd": "D:\\Games\\UE_4.26",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "D:\\Games\\UE_4.26\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "MegaJam2021 (DebugGame)",
+			"request": "launch",
+			"preLaunchTask": "MegaJam2021 Win64 DebugGame Build",
+			"program": "C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\Binaries\\Win64\\UE4-Win64-DebugGame.exe",
+			"args": [
+			],
+			"cwd": "D:\\Games\\UE_4.26",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "D:\\Games\\UE_4.26\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "MegaJam2021 (Development)",
+			"request": "launch",
+			"preLaunchTask": "MegaJam2021 Win64 Development Build",
+			"program": "C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\Binaries\\Win64\\UE4.exe",
+			"args": [
+			],
+			"cwd": "D:\\Games\\UE_4.26",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "D:\\Games\\UE_4.26\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "MegaJam2021 (Shipping)",
+			"request": "launch",
+			"preLaunchTask": "MegaJam2021 Win64 Shipping Build",
+			"program": "C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\Binaries\\Win64\\UE4-Win64-Shipping.exe",
+			"args": [
+			],
+			"cwd": "D:\\Games\\UE_4.26",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "D:\\Games\\UE_4.26\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "MegaJam2021 (Test)",
+			"request": "launch",
+			"preLaunchTask": "MegaJam2021 Win64 Test Build",
+			"program": "C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\Binaries\\Win64\\UE4-Win64-Test.exe",
+			"args": [
+			],
+			"cwd": "D:\\Games\\UE_4.26",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "D:\\Games\\UE_4.26\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "MegaJam2021Editor (Debug)",
+			"request": "launch",
+			"preLaunchTask": "MegaJam2021Editor Win64 Debug Build",
+			"program": "D:\\Games\\UE_4.26\\Engine\\Binaries\\Win64\\UE4Editor-Win64-Debug.exe",
+			"args": [
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject"
+			],
+			"cwd": "D:\\Games\\UE_4.26",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "D:\\Games\\UE_4.26\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "MegaJam2021Editor (DebugGame)",
+			"request": "launch",
+			"preLaunchTask": "MegaJam2021Editor Win64 DebugGame Build",
+			"program": "D:\\Games\\UE_4.26\\Engine\\Binaries\\Win64\\UE4Editor-Win64-DebugGame.exe",
+			"args": [
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject"
+			],
+			"cwd": "D:\\Games\\UE_4.26",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "D:\\Games\\UE_4.26\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "MegaJam2021Editor (Development)",
+			"request": "launch",
+			"preLaunchTask": "MegaJam2021Editor Win64 Development Build",
+			"program": "D:\\Games\\UE_4.26\\Engine\\Binaries\\Win64\\UE4Editor.exe",
+			"args": [
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject"
+			],
+			"cwd": "D:\\Games\\UE_4.26",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "D:\\Games\\UE_4.26\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "Generate Project Files",
+			"type": "clr",
+			"request": "launch",
+			"program": "D:\\Games\\UE_4.26\\Engine\\Binaries\\DotNET\\UnrealBuildTool.exe",
+			"console": "externalTerminal",
+			"args": [
+				"-projectfiles",
+				"-vscode",
+				"-project=C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-game",
+				"-engine"
+			],
+			"internalConsoleOptions": "openOnSessionStart",
+			"cwd": "D:\\Games\\UE_4.26"
+		}
+	]
+}
