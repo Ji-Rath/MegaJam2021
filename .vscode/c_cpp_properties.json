@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "name": "MegaJam2021Editor Editor Win64 Development (MegaJam2021)",
+            "intelliSenseMode": "msvc-x64",
+            "compileCommands": "C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\.vscode\\compileCommands_MegaJam2021.json",
+            "cStandard": "c17",
+            "cppStandard": "c++17"
+        },
+        {
+            "name": "Win32",
+            "intelliSenseMode": "msvc-x64",
+            "compileCommands": "C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\.vscode\\compileCommands_Default.json",
+            "cStandard": "c17",
+            "cppStandard": "c++17"
+        }
+    ],
+    "version": 4
+}

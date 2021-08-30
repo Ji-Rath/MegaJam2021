@@ -1,0 +1,77 @@
+[
+	{
+		"file": "C:\\\\Users\\\\91943\\\\Documents\\\\GitHub\\\\MegaJam2021\\\\Source\\\\MegaJam2021\\\\BTTask_GetNextSplinePoint.cpp",
+		"command": "cl.exe @\"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\.vscode\\compileCommands_Default\\MegaJam2021.182.rsp\"",
+		"directory": "D:\\Games\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "C:\\\\Users\\\\91943\\\\Documents\\\\GitHub\\\\MegaJam2021\\\\Source\\\\MegaJam2021\\\\BTTask_GetNextSplinePoint.h",
+		"command": "cl.exe @\"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\.vscode\\compileCommands_Default\\MegaJam2021.182.rsp\"",
+		"directory": "D:\\Games\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "C:\\\\Users\\\\91943\\\\Documents\\\\GitHub\\\\MegaJam2021\\\\Source\\\\MegaJam2021\\\\BTTask_GetWanderPoint.cpp",
+		"command": "cl.exe @\"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\.vscode\\compileCommands_Default\\MegaJam2021.182.rsp\"",
+		"directory": "D:\\Games\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "C:\\\\Users\\\\91943\\\\Documents\\\\GitHub\\\\MegaJam2021\\\\Source\\\\MegaJam2021\\\\BTTask_GetWanderPoint.h",
+		"command": "cl.exe @\"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\.vscode\\compileCommands_Default\\MegaJam2021.182.rsp\"",
+		"directory": "D:\\Games\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "C:\\\\Users\\\\91943\\\\Documents\\\\GitHub\\\\MegaJam2021\\\\Source\\\\MegaJam2021\\\\CharacterController.cpp",
+		"command": "cl.exe @\"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\.vscode\\compileCommands_Default\\MegaJam2021.182.rsp\"",
+		"directory": "D:\\Games\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "C:\\\\Users\\\\91943\\\\Documents\\\\GitHub\\\\MegaJam2021\\\\Source\\\\MegaJam2021\\\\CharacterController.h",
+		"command": "cl.exe @\"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\.vscode\\compileCommands_Default\\MegaJam2021.182.rsp\"",
+		"directory": "D:\\Games\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "C:\\\\Users\\\\91943\\\\Documents\\\\GitHub\\\\MegaJam2021\\\\Source\\\\MegaJam2021\\\\EnemyController.cpp",
+		"command": "cl.exe @\"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\.vscode\\compileCommands_Default\\MegaJam2021.182.rsp\"",
+		"directory": "D:\\Games\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "C:\\\\Users\\\\91943\\\\Documents\\\\GitHub\\\\MegaJam2021\\\\Source\\\\MegaJam2021\\\\EnemyController.h",
+		"command": "cl.exe @\"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\.vscode\\compileCommands_Default\\MegaJam2021.182.rsp\"",
+		"directory": "D:\\Games\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "C:\\\\Users\\\\91943\\\\Documents\\\\GitHub\\\\MegaJam2021\\\\Source\\\\MegaJam2021\\\\MegaJam2021.Build.cs",
+		"command": "cl.exe @\"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\.vscode\\compileCommands_Default\\MegaJam2021.182.rsp\"",
+		"directory": "D:\\Games\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "C:\\\\Users\\\\91943\\\\Documents\\\\GitHub\\\\MegaJam2021\\\\Source\\\\MegaJam2021\\\\MegaJam2021.cpp",
+		"command": "cl.exe @\"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\.vscode\\compileCommands_Default\\MegaJam2021.182.rsp\"",
+		"directory": "D:\\Games\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "C:\\\\Users\\\\91943\\\\Documents\\\\GitHub\\\\MegaJam2021\\\\Source\\\\MegaJam2021\\\\MegaJam2021.h",
+		"command": "cl.exe @\"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\.vscode\\compileCommands_Default\\MegaJam2021.182.rsp\"",
+		"directory": "D:\\Games\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "C:\\\\Users\\\\91943\\\\Documents\\\\GitHub\\\\MegaJam2021\\\\Source\\\\MegaJam2021\\\\MegaJam2021GameModeBase.cpp",
+		"command": "cl.exe @\"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\.vscode\\compileCommands_Default\\MegaJam2021.182.rsp\"",
+		"directory": "D:\\Games\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "C:\\\\Users\\\\91943\\\\Documents\\\\GitHub\\\\MegaJam2021\\\\Source\\\\MegaJam2021\\\\MegaJam2021GameModeBase.h",
+		"command": "cl.exe @\"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\.vscode\\compileCommands_Default\\MegaJam2021.182.rsp\"",
+		"directory": "D:\\Games\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "C:\\\\Users\\\\91943\\\\Documents\\\\GitHub\\\\MegaJam2021\\\\Source\\\\MegaJam2021\\\\PlayerCharacter.cpp",
+		"command": "cl.exe @\"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\.vscode\\compileCommands_Default\\MegaJam2021.182.rsp\"",
+		"directory": "D:\\Games\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "C:\\\\Users\\\\91943\\\\Documents\\\\GitHub\\\\MegaJam2021\\\\Source\\\\MegaJam2021\\\\PlayerCharacter.h",
+		"command": "cl.exe @\"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\.vscode\\compileCommands_Default\\MegaJam2021.182.rsp\"",
+		"directory": "D:\\Games\\UE_4.26\\Engine\\Source"
+	}
+]

@@ -1,0 +1,707 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "MegaJam2021 Win32 Debug Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MegaJam2021",
+				"Win32",
+				"Debug",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021 Win32 Debug Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MegaJam2021",
+				"Win32",
+				"Debug",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"MegaJam2021 Win32 Debug Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021 Win32 Debug Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"MegaJam2021",
+				"Win32",
+				"Debug",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021 Win32 DebugGame Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MegaJam2021",
+				"Win32",
+				"DebugGame",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021 Win32 DebugGame Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MegaJam2021",
+				"Win32",
+				"DebugGame",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"MegaJam2021 Win32 DebugGame Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021 Win32 DebugGame Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"MegaJam2021",
+				"Win32",
+				"DebugGame",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021 Win32 Development Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MegaJam2021",
+				"Win32",
+				"Development",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021 Win32 Development Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MegaJam2021",
+				"Win32",
+				"Development",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"MegaJam2021 Win32 Development Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021 Win32 Development Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"MegaJam2021",
+				"Win32",
+				"Development",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021 Win32 Shipping Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MegaJam2021",
+				"Win32",
+				"Shipping",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021 Win32 Shipping Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MegaJam2021",
+				"Win32",
+				"Shipping",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"MegaJam2021 Win32 Shipping Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021 Win32 Shipping Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"MegaJam2021",
+				"Win32",
+				"Shipping",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021 Win32 Test Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MegaJam2021",
+				"Win32",
+				"Test",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021 Win32 Test Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MegaJam2021",
+				"Win32",
+				"Test",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"MegaJam2021 Win32 Test Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021 Win32 Test Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"MegaJam2021",
+				"Win32",
+				"Test",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021 Win64 Debug Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MegaJam2021",
+				"Win64",
+				"Debug",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021 Win64 Debug Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MegaJam2021",
+				"Win64",
+				"Debug",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"MegaJam2021 Win64 Debug Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021 Win64 Debug Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"MegaJam2021",
+				"Win64",
+				"Debug",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021 Win64 DebugGame Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MegaJam2021",
+				"Win64",
+				"DebugGame",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021 Win64 DebugGame Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MegaJam2021",
+				"Win64",
+				"DebugGame",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"MegaJam2021 Win64 DebugGame Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021 Win64 DebugGame Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"MegaJam2021",
+				"Win64",
+				"DebugGame",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021 Win64 Development Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MegaJam2021",
+				"Win64",
+				"Development",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021 Win64 Development Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MegaJam2021",
+				"Win64",
+				"Development",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"MegaJam2021 Win64 Development Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021 Win64 Development Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"MegaJam2021",
+				"Win64",
+				"Development",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021 Win64 Shipping Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MegaJam2021",
+				"Win64",
+				"Shipping",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021 Win64 Shipping Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MegaJam2021",
+				"Win64",
+				"Shipping",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"MegaJam2021 Win64 Shipping Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021 Win64 Shipping Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"MegaJam2021",
+				"Win64",
+				"Shipping",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021 Win64 Test Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MegaJam2021",
+				"Win64",
+				"Test",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021 Win64 Test Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MegaJam2021",
+				"Win64",
+				"Test",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"MegaJam2021 Win64 Test Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021 Win64 Test Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"MegaJam2021",
+				"Win64",
+				"Test",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021Editor Win64 Debug Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MegaJam2021Editor",
+				"Win64",
+				"Debug",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021Editor Win64 Debug Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MegaJam2021Editor",
+				"Win64",
+				"Debug",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"MegaJam2021Editor Win64 Debug Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021Editor Win64 Debug Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"MegaJam2021Editor",
+				"Win64",
+				"Debug",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021Editor Win64 DebugGame Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MegaJam2021Editor",
+				"Win64",
+				"DebugGame",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021Editor Win64 DebugGame Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MegaJam2021Editor",
+				"Win64",
+				"DebugGame",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"MegaJam2021Editor Win64 DebugGame Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021Editor Win64 DebugGame Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"MegaJam2021Editor",
+				"Win64",
+				"DebugGame",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021Editor Win64 Development Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MegaJam2021Editor",
+				"Win64",
+				"Development",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021Editor Win64 Development Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MegaJam2021Editor",
+				"Win64",
+				"Development",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"MegaJam2021Editor Win64 Development Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		},
+		{
+			"label": "MegaJam2021Editor Win64 Development Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"MegaJam2021Editor",
+				"Win64",
+				"Development",
+				"C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\MegaJam2021.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Games\\UE_4.26"
+			}
+		}
+	]
+}
