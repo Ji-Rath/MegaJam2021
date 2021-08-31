@@ -11,7 +11,7 @@ UInventoryComponent::UInventoryComponent()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 
-	// ...
+	Inventory.AddDefaulted(InventorySize.X * InventorySize.Y);
 }
 
 
@@ -20,7 +20,7 @@ void UInventoryComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
+	
 	
 }
 
@@ -43,7 +43,7 @@ bool UInventoryComponent::TryAddItem(UItemData* Item)
 
 		if (bCanPlaceItem)
 		{
-			
+			SpawnWidgetItem(Item, Position);
 			return true;
 		}
 	}

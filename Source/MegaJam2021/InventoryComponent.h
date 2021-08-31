@@ -7,7 +7,7 @@
 #include "ItemData.h"
 #include "InventoryComponent.generated.h"
 
-class UWidget;
+class UGridPanel;
 
 UCLASS(Blueprintable, ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class MEGAJAM2021_API UInventoryComponent : public UActorComponent
@@ -44,6 +44,6 @@ public:
 	UFUNCTION(BlueprintCallable)
 	int PosToIndex(FIntVector2D Position);
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	UWidget* InventoryWidget;
+	UFUNCTION(BlueprintImplementableEvent)
+	void SpawnWidgetItem(UItemData* Item, FIntVector2D Position);
 };
