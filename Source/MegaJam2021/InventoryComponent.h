@@ -9,6 +9,9 @@
 
 class UGridPanel;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FItemAdded, UItemData*, Item, FIntVector2D, Position);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FToggleInventory, bool, bOpen);
+
 UCLASS(Blueprintable, ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class MEGAJAM2021_API UInventoryComponent : public UActorComponent
 {
@@ -36,6 +39,15 @@ public:
 	bool TryAddItem(UItemData* Item);
 
 	UFUNCTION(BlueprintCallable)
+	bool AddToSlot(UItemData* Item, FIntVector2D Position);
+
+	UFUNCTION(BlueprintCallable)
+	void SetOccupied(bool bOccupied, TArray<FIntVector2D> Positions);
+
+	UFUNCTION(BlueprintCallable)
+	TArray<FIntVector2D> GetSpaceTaken(FIntVector2D Size, FIntVector2D Position);
+
+	UFUNCTION(BlueprintCallable)
 	bool HasAvailableSpace(FIntVector2D Position, FIntVector2D ItemSize);
 
 	UFUNCTION(BlueprintCallable)
@@ -46,4 +58,10 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void SpawnWidgetItem(UItemData* Item, FIntVector2D Position);
+
+	UPROPERTY(BlueprintAssignable)
+	FItemAdded OnItemAdded;
+
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FToggleInventory OnToggleInventory;
 };

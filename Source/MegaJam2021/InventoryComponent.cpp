@@ -11,7 +11,7 @@ UInventoryComponent::UInventoryComponent()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 
-	Inventory.AddDefaulted(InventorySize.X * InventorySize.Y);
+	
 }
 
 
@@ -20,8 +20,7 @@ void UInventoryComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	
-	
+	Inventory.AddDefaulted(InventorySize.X * InventorySize.Y);
 }
 
 
@@ -43,6 +42,7 @@ bool UInventoryComponent::TryAddItem(UItemData* Item)
 
 		if (bCanPlaceItem)
 		{
+			OnItemAdded.Broadcast(Item, Position);
 			SpawnWidgetItem(Item, Position);
 			return true;
 		}
@@ -51,14 +51,54 @@ bool UInventoryComponent::TryAddItem(UItemData* Item)
 	return false;
 }
 
+bool UInventoryComponent::AddToSlot(UItemData* Item, FIntVector2D Position)
+{
+	bool bCanPlaceItem = HasAvailableSpace(Position, Item->Size);
+
+	if (bCanPlaceItem)
+	{
+		OnItemAdded.Broadcast(Item, Position);
+		SpawnWidgetItem(Item, Position);
+		return true;
+	}
+
+	return false;
+}
+
+void UInventoryComponent::SetOccupied(bool bOccupied, TArray<FIntVector2D> Positions)
+{
+	for (FIntVector2D SlotPos : Positions)
+	{
+		int SlotIndex = PosToIndex(SlotPos);
+		Inventory[SlotIndex].bTaken = bOccupied;
+		UE_LOG(LogTemp, Log, TEXT("SLOT (%d, %d) HAS NOW BEEN TAKEN!"), SlotPos.X, SlotPos.Y);
+	}
+}
+
+TArray<FIntVector2D> UInventoryComponent::GetSpaceTaken(FIntVector2D Size, FIntVector2D Position)
+{
+	TArray<FIntVector2D> FreeSlots;
+
+	for (int XPos = Position.X; XPos < Size.X + Position.X; XPos++)
+	{
+		for (int YPos = Position.Y; YPos < Size.Y + Position.Y; YPos++)
+		{
+			FreeSlots.Add(FIntVector2D(XPos, YPos));
+		}
+	}
+
+	return FreeSlots;
+}
+
 bool UInventoryComponent::HasAvailableSpace(FIntVector2D Position, FIntVector2D ItemSize)
 {
-	
-	for (int XPos = Position.X; XPos < ItemSize.X; XPos++)
+	TArray<FIntVector2D> FreeSlots;
+
+	for (int XPos = Position.X; XPos < ItemSize.X+Position.X; XPos++)
 	{
 		if (XPos < InventorySize.X)
 		{
-			for (int YPos = Position.Y; YPos < ItemSize.Y; YPos++)
+			for (int YPos = Position.Y; YPos < ItemSize.Y+Position.Y; YPos++)
 			{
 				//First make sure slot that we are checking is not out of bounds
 				if (YPos < InventorySize.Y)
@@ -68,6 +108,10 @@ bool UInventoryComponent::HasAvailableSpace(FIntVector2D Position, FIntVector2D 
 					if (SlotCheck.bTaken)
 					{
 						return false;
+					}
+					else
+					{
+						FreeSlots.Add(FIntVector2D(XPos, YPos));
 					}
 				}
 				else
@@ -81,6 +125,8 @@ bool UInventoryComponent::HasAvailableSpace(FIntVector2D Position, FIntVector2D 
 			return false;
 		}
 	}
+
+	SetOccupied(true, FreeSlots);
 
 	return true;
 }
@@ -99,8 +145,8 @@ FIntVector2D UInventoryComponent::IndexToPos(int Index)
 {
 	FIntVector2D ReturnPosition;
 
-	ReturnPosition.X = Index / InventorySize.X;
-	ReturnPosition.Y = Index % InventorySize.X;
+	ReturnPosition.Y = Index / InventorySize.X;
+	ReturnPosition.X = Index % InventorySize.X;
 
 	return ReturnPosition;
 }
