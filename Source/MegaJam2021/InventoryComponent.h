@@ -42,6 +42,9 @@ public:
 	bool AddToSlot(UItemData* Item, FIntVector2D Position);
 
 	UFUNCTION(BlueprintCallable)
+	void RemoveItem(FIntVector2D Size, FIntVector2D Position);
+
+	UFUNCTION(BlueprintCallable)
 	void SetOccupied(bool bOccupied, TArray<FIntVector2D> Positions);
 
 	UFUNCTION(BlueprintCallable)
@@ -55,9 +58,6 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	int PosToIndex(FIntVector2D Position);
-
-	UFUNCTION(BlueprintImplementableEvent)
-	void SpawnWidgetItem(UItemData* Item, FIntVector2D Position);
 
 	UPROPERTY(BlueprintAssignable)
 	FItemAdded OnItemAdded;

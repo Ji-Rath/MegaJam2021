@@ -36,7 +36,10 @@ struct FSlotData
 	GENERATED_USTRUCT_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	FIntVector2D Position;
+	UItemData* Item;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	bool bSourceTile = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	bool bTaken = false;
@@ -56,5 +59,4 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	FIntVector2D Size;
-	
 };
