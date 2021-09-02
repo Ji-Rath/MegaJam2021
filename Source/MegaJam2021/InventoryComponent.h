@@ -47,17 +47,25 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SetOccupied(bool bOccupied, TArray<FIntVector2D> Positions);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, BlueprintPure)
 	TArray<FIntVector2D> GetSpaceTaken(FIntVector2D Size, FIntVector2D Position);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, BlueprintPure)
 	bool HasAvailableSpace(FIntVector2D Position, FIntVector2D ItemSize);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, BlueprintPure)
 	FIntVector2D IndexToPos(int Index);
 
-	UFUNCTION(BlueprintCallable)
+	/** Get all items stored in the inventory */
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	TArray<UItemData*> GetItems();
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
 	int PosToIndex(FIntVector2D Position);
+
+	/** Get the total value of the inventory */
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	float GetInventoryValue();
 
 	UPROPERTY(BlueprintAssignable)
 	FItemAdded OnItemAdded;

@@ -59,4 +59,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	FIntVector2D Size;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float ItemValue = 0.f;
 };

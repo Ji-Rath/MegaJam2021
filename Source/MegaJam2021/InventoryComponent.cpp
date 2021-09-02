@@ -160,6 +160,17 @@ int UInventoryComponent::PosToIndex(FIntVector2D Position)
 
 }
 
+float UInventoryComponent::GetInventoryValue()
+{
+	float Value = 0.f;
+	TArray<UItemData*> Items = GetItems();
+	for (UItemData* Item : Items)
+	{
+		Value += Item->ItemValue;
+	}
+	return Value;
+}
+
 FIntVector2D UInventoryComponent::IndexToPos(int Index)
 {
 	FIntVector2D ReturnPosition;
@@ -168,5 +179,18 @@ FIntVector2D UInventoryComponent::IndexToPos(int Index)
 	ReturnPosition.X = Index % InventorySize.X;
 
 	return ReturnPosition;
+}
+
+TArray<UItemData*> UInventoryComponent::GetItems()
+{
+	TArray<UItemData*> Items;
+	for (FSlotData Slot : Inventory)
+	{
+		if (Slot.Item != nullptr)
+		{
+			Items.Add(Slot.Item);
+		}
+	}
+	return Items;
 }
 
