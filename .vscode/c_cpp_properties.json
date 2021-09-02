@@ -12,7 +12,11 @@
             "intelliSenseMode": "msvc-x64",
             "compileCommands": "C:\\Users\\91943\\Documents\\GitHub\\MegaJam2021\\.vscode\\compileCommands_Default.json",
             "cStandard": "c17",
-            "cppStandard": "c++17"
+            "cppStandard": "c++17",
+            "includePath": [
+                "${default}",
+                "D:/Games/UE_4.26/Engine/Source/Runtime/Core/Public"
+            ]
         }
     ],
     "version": 4
