@@ -60,6 +60,7 @@ bool UInventoryComponent::AddToSlot(UItemData* Item, FIntVector2D Position)
 	{
 		int SlotNum = PosToIndex(Position);
 		Inventory[SlotNum].Item = Item;
+		Inventory[SlotNum].bSourceTile = true;
 		OnItemAdded.Broadcast(Item, Position);
 		return true;
 	}
