@@ -36,7 +36,7 @@ struct FSlotData
 	GENERATED_USTRUCT_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	UItemData* Item;
+	UItemData* Item = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	bool bSourceTile = false;
@@ -55,7 +55,7 @@ class MEGAJAM2021_API UItemData : public UDataAsset
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	UTexture2D* ItemIcon;
+	UTexture2D* ItemIcon = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	FIntVector2D Size;
