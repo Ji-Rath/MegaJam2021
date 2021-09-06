@@ -43,7 +43,6 @@ bool UInventoryComponent::TryAddItem(UItemData* Item)
 		if (bCanPlaceItem)
 		{
 			Inventory[SlotNum].Item = Item;
-			Inventory[SlotNum].bSourceTile = true;
 			OnItemAdded.Broadcast(Item, Position);
 			return true;
 		}
@@ -60,7 +59,6 @@ bool UInventoryComponent::AddToSlot(UItemData* Item, FIntVector2D Position)
 	{
 		int SlotNum = PosToIndex(Position);
 		Inventory[SlotNum].Item = Item;
-		Inventory[SlotNum].bSourceTile = true;
 		OnItemAdded.Broadcast(Item, Position);
 		return true;
 	}
@@ -72,7 +70,6 @@ void UInventoryComponent::RemoveItem(FIntVector2D Size, FIntVector2D Position)
 {
 	int SlotNum = PosToIndex(Position);
 	Inventory[SlotNum].Item = nullptr;
-	Inventory[SlotNum].bSourceTile = false;
 
 	TArray<FIntVector2D> SpaceTaken = GetSpaceTaken(Size, Position);
 	SetOccupied(false, SpaceTaken);
@@ -87,7 +84,6 @@ void UInventoryComponent::SetOccupied(bool bOccupied, TArray<FIntVector2D> Posit
 		if (!bOccupied)
 		{
 			Inventory[SlotIndex].Item = nullptr;
-			Inventory[SlotIndex].bSourceTile = false;
 		}
 			
 		UE_LOG(LogTemp, Log, TEXT("SLOT (%d, %d) HAS NOW BEEN TAKEN!"), SlotPos.X, SlotPos.Y);

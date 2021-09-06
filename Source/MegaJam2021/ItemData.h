@@ -35,12 +35,11 @@ struct FSlotData
 {
 	GENERATED_USTRUCT_BODY()
 
+	/** Store a reference of the item data when this is the primary slot */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	UItemData* Item = nullptr;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	bool bSourceTile = false;
-
+	/** Used when Item is nullptr but the space is still taken */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	bool bTaken = false;
 };
@@ -54,12 +53,25 @@ class MEGAJAM2021_API UItemData : public UDataAsset
 	GENERATED_BODY()
 
 public:
+
+	/** Texture of item */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	UTexture2D* ItemIcon = nullptr;
 
+	/** Size that the item takes up in inventory */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	FIntVector2D Size;
+	FIntVector2D Size = FIntVector2D();
 
+	/** The value of the item */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float ItemValue = 0.f;
+
+	/** Name of the item */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FText Name = FText::FromString(TEXT("NoName"));
+
+	/** Description of item */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FText Description;
+
 };
