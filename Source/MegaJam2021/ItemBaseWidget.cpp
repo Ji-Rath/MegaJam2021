@@ -4,6 +4,7 @@
 #include "ItemBaseWidget.h"
 #include "ItemData.h"
 #include "Components/GridPanel.h"
+#include "TileBaseWidget.h"
 
 UItemBaseWidget::UItemBaseWidget(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
@@ -12,12 +13,19 @@ UItemBaseWidget::UItemBaseWidget(const FObjectInitializer& ObjectInitializer) : 
 
 void UItemBaseWidget::ConstructGrid(FIntVector2D Size)
 {
-	for (int i = 0; i < Size.X; i++)
+	for (int i = Position.X; i < Size.X+Position.X; i++)
 	{
-		for (int j = 0; j < Size.Y; j++)
+		for (int j = Position.Y; j < Size.Y+Position.Y; j++)
 		{
-			auto* Tile = CreateWidget(GetOwningPlayer(), SlotWidget);
-			GridTiles->AddChildToGrid(Tile, j, i);
+			auto* Tile = CreateWidget<UTileBaseWidget>(GetOwningPlayer(), SlotWidget);
+			if (Tile)
+			{
+				Tile->InventoryWidget = InventoryWidget;
+				Tile->Position = FIntVector2D(i, j);
+
+				if (GridTiles)
+					GridTiles->AddChildToGrid(Tile, j, i);
+			}
 		}
 	}
 }

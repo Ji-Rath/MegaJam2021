@@ -18,12 +18,15 @@ void UInventoryBaseWidget::ConstructGrid(FIntVector2D Size)
 		for (int j = 0; j < Size.Y; j++)
 		{
 			UTileBaseWidget* Tile = CreateWidget<UTileBaseWidget>(GetOwningPlayer(), SlotWidget);
-			GridTiles->AddChildToGrid(Tile, j, i);
 			if (Tile)
 			{
 				Tile->InventoryWidget = this;
 				Tile->Position = FIntVector2D(i, j);
+
+				if (GridTiles)
+					GridTiles->AddChildToGrid(Tile, j, i);
 			}
+			
 		}
 	}
 }

@@ -86,7 +86,7 @@ void UInventoryComponent::SetOccupied(bool bOccupied, TArray<FIntVector2D> Posit
 			Inventory[SlotIndex].Item = nullptr;
 		}
 			
-		UE_LOG(LogTemp, Log, TEXT("SLOT (%d, %d) HAS NOW BEEN TAKEN!"), SlotPos.X, SlotPos.Y);
+		//UE_LOG(LogTemp, Log, TEXT("SLOT (%d, %d) HAS NOW BEEN TAKEN!"), SlotPos.X, SlotPos.Y);
 	}
 }
 
