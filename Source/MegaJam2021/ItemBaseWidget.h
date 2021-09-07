@@ -31,7 +31,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ExposeOnSpawn = "true"))
 	FIntVector2D Position;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ExposeOnSpawn = "true"))
+	UPROPERTY(BlueprintReadWrite, meta = (ExposeOnSpawn = "true"))
 	UInventoryBaseWidget* InventoryWidget = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -39,7 +39,5 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	UGridPanel* GridTiles = nullptr;
-
-	bool Initialize() override;
 
 };

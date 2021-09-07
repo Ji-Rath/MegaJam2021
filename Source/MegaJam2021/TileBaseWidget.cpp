@@ -12,16 +12,19 @@ bool UTileBaseWidget::OnPlaceItem(FGeometry Geometry, FPointerEvent PointerEvent
 {
 	if (ensure(Operation && IsValid(Operation->Payload) && InventoryWidget))
 	{
+		// Retrieve payload from drag drop operation
 		UItemBaseWidget* ItemWidget = Cast<UItemBaseWidget>(Operation->Payload);
 
 		if (ensure(ItemWidget && ItemWidget->InventoryWidget))
 		{
+			// Get inventory component references
 			UInventoryComponent* OtherInventoryComp = ItemWidget->InventoryWidget->InventoryReference;
 			UInventoryComponent* InventoryComp = InventoryWidget->InventoryReference;
 
 			if (ensure(ItemWidget && OtherInventoryComp && ItemWidget->ItemData && InventoryComp))
 			{
-				bool bHasSpace = OtherInventoryComp->HasAvailableSpace(Position, ItemWidget->ItemData->Size);
+				// Ensure the inventory that we are dropping the item to has space
+				bool bHasSpace = InventoryComp->HasAvailableSpace(Position, ItemWidget->ItemData->Size);
 				if (bHasSpace)
 				{
 					// Clear space from old inventory
