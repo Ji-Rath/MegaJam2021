@@ -42,6 +42,19 @@ struct FSlotData
 	/** Used when Item is nullptr but the space is still taken */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	bool bTaken = false;
+
+	FSlotData()
+	{
+		Item = nullptr;
+
+		bTaken = false;
+	};
+
+	FSlotData(UItemData* NewItem, bool bIsTaken)
+	{
+		Item = NewItem;
+		bTaken = bIsTaken;
+	};
 };
 
 /**
