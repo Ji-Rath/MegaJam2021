@@ -34,21 +34,22 @@ void UInventoryComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 
 bool UInventoryComponent::TryAddItem(UItemData* Item)
 {
-	for (int SlotNum = 0; SlotNum < Inventory.Num(); SlotNum++)
+	if (ensure(Item))
 	{
-		FSlotData Slot = Inventory[SlotNum];
-		FIntVector2D Position = IndexToPos(SlotNum);
-		bool bCanPlaceItem = HasAvailableSpace(Position, Item->Size);
-
-		if (bCanPlaceItem)
+		for (int SlotNum = 0; SlotNum < Inventory.Num(); SlotNum++)
 		{
-			Inventory[SlotNum].Item = Item;
-			Inventory[SlotNum].bSourceTile = true;
-			OnItemAdded.Broadcast(Item, Position);
-			return true;
+			FSlotData Slot = Inventory[SlotNum];
+			FIntVector2D Position = IndexToPos(SlotNum);
+			bool bCanPlaceItem = HasAvailableSpace(Position, Item->Size);
+
+			if (bCanPlaceItem)
+			{
+				Inventory[SlotNum].Item = Item;
+				OnItemAdded.Broadcast(Item, Position);
+				return true;
+			}
 		}
 	}
-
 	return false;
 }
 
@@ -60,7 +61,6 @@ bool UInventoryComponent::AddToSlot(UItemData* Item, FIntVector2D Position)
 	{
 		int SlotNum = PosToIndex(Position);
 		Inventory[SlotNum].Item = Item;
-		Inventory[SlotNum].bSourceTile = true;
 		OnItemAdded.Broadcast(Item, Position);
 		return true;
 	}
@@ -72,7 +72,6 @@ void UInventoryComponent::RemoveItem(FIntVector2D Size, FIntVector2D Position)
 {
 	int SlotNum = PosToIndex(Position);
 	Inventory[SlotNum].Item = nullptr;
-	Inventory[SlotNum].bSourceTile = false;
 
 	TArray<FIntVector2D> SpaceTaken = GetSpaceTaken(Size, Position);
 	SetOccupied(false, SpaceTaken);
@@ -87,10 +86,9 @@ void UInventoryComponent::SetOccupied(bool bOccupied, TArray<FIntVector2D> Posit
 		if (!bOccupied)
 		{
 			Inventory[SlotIndex].Item = nullptr;
-			Inventory[SlotIndex].bSourceTile = false;
 		}
 			
-		UE_LOG(LogTemp, Log, TEXT("SLOT (%d, %d) HAS NOW BEEN TAKEN!"), SlotPos.X, SlotPos.Y);
+		//UE_LOG(LogTemp, Log, TEXT("SLOT (%d, %d) HAS NOW BEEN TAKEN!"), SlotPos.X, SlotPos.Y);
 	}
 }
 
