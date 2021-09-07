@@ -88,7 +88,7 @@ void UInventoryBaseWidget::ReconstructItems()
 	for(int i = 0; i < InventoryReference->Inventory.Num(); i++)
 	{
 		FSlotData SlotData = InventoryReference->Inventory[i];
-		if (SlotData.Item != nullptr)
+		if (SlotData.Item != nullptr && SlotData.bTaken)
 		{
 			FIntVector2D Position = InventoryReference->IndexToPos(i);
 			AddItem(SlotData.Item, Position);

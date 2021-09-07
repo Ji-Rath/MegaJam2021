@@ -34,20 +34,22 @@ void UInventoryComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 
 bool UInventoryComponent::TryAddItem(UItemData* Item)
 {
-	for (int SlotNum = 0; SlotNum < Inventory.Num(); SlotNum++)
+	if (ensure(Item))
 	{
-		FSlotData Slot = Inventory[SlotNum];
-		FIntVector2D Position = IndexToPos(SlotNum);
-		bool bCanPlaceItem = HasAvailableSpace(Position, Item->Size);
-
-		if (bCanPlaceItem)
+		for (int SlotNum = 0; SlotNum < Inventory.Num(); SlotNum++)
 		{
-			Inventory[SlotNum].Item = Item;
-			OnItemAdded.Broadcast(Item, Position);
-			return true;
+			FSlotData Slot = Inventory[SlotNum];
+			FIntVector2D Position = IndexToPos(SlotNum);
+			bool bCanPlaceItem = HasAvailableSpace(Position, Item->Size);
+
+			if (bCanPlaceItem)
+			{
+				Inventory[SlotNum].Item = Item;
+				OnItemAdded.Broadcast(Item, Position);
+				return true;
+			}
 		}
 	}
-
 	return false;
 }
 
