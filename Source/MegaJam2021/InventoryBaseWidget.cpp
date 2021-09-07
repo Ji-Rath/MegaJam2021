@@ -30,26 +30,34 @@ void UInventoryBaseWidget::ConstructGrid(FIntVector2D Size)
 
 void UInventoryBaseWidget::AddItem(UItemData* ItemData, FIntVector2D Position)
 {
+	// Create item widget
 	UItemBaseWidget* Item = CreateWidget<UItemBaseWidget>(GetOwningPlayer(), ItemWidget);
-	UCanvasPanelSlot* CanvasItem = CanvasItems->AddChildToCanvas(Item);
-	CanvasItem->SetAutoSize(true);
-	CanvasItem->SetPosition(FVector2D(Position.X,Position.Y)*100);
+
+	// Set values of new item widget
 	Item->Position = Position;
 	Item->ItemData = ItemData;
 	Item->InventoryWidget = this;
-	Item->Initialize();
+
+	// Set proper position of item widget
+	UCanvasPanelSlot* CanvasItem = CanvasItems->AddChildToCanvas(Item);
+	CanvasItem->SetAutoSize(true);
+	CanvasItem->SetPosition(FVector2D(Position.X, Position.Y) * 100);
 }
 
 void UInventoryBaseWidget::ToggleInventory(bool bOpen)
 {
+	// Set inventory visibility
 	EUMGSequencePlayMode::Type PlayMode = bOpen ? EUMGSequencePlayMode::Forward : EUMGSequencePlayMode::Reverse;
 	PlayAnimation(FadeInAnim, 0.0f, 1, PlayMode);
+
+	// Show mouse cursor and ignore look input
 	if (GetOwningPlayer())
 	{
 		GetOwningPlayer()->SetIgnoreLookInput(true);
 		GetOwningPlayer()->bShowMouseCursor = true;
 	}
 
+	// If the inventory is opened, reconstruct item widgets
 	if (bOpen)
 	{
 		ReconstructItems();

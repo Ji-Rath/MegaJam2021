@@ -21,15 +21,3 @@ void UItemBaseWidget::ConstructGrid(FIntVector2D Size)
 		}
 	}
 }
-
-bool UItemBaseWidget::Initialize()
-{
-	bool bSuccess = Super::Initialize();
-
-	if (ItemData)
-	{
-		ConstructGrid(ItemData->Size);
-	}
-
-	return bSuccess;
-}
