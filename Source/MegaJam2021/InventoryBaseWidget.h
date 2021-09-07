@@ -46,16 +46,16 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<UUserWidget> ItemWidget;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite)
 	UInventoryComponent* InventoryReference = nullptr;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-	UGridPanel* GridPanel = nullptr;
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+	UGridPanel* GridTiles = nullptr;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-	UCanvasPanel* CanvasPanel = nullptr;
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+	UCanvasPanel* CanvasItems = nullptr;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-	UWidgetAnimation* FadeAnimation = nullptr;
+	UPROPERTY(BlueprintReadWrite, Transient, meta = (BindWidgetAnim))
+	UWidgetAnimation* FadeInAnim = nullptr;
 
 };

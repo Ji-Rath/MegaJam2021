@@ -8,6 +8,8 @@
 #include "ItemData.h"
 #include "Kismet/GameplayStatics.h"
 #include "InventoryComponent.h"
+#include "ItemBaseWidget.h"
+#include "TileBaseWidget.h"
 
 void UInventoryBaseWidget::ConstructGrid(FIntVector2D Size)
 {
@@ -15,26 +17,38 @@ void UInventoryBaseWidget::ConstructGrid(FIntVector2D Size)
 	{
 		for (int j = 0; j < Size.Y; j++)
 		{
-			auto* Tile = CreateWidget(GetOwningPlayer(), SlotWidget);
-			GridPanel->AddChildToGrid(Tile, i, j);
+			UTileBaseWidget* Tile = CreateWidget<UTileBaseWidget>(GetOwningPlayer(), SlotWidget);
+			GridTiles->AddChildToGrid(Tile, j, i);
+			if (Tile)
+			{
+				Tile->InventoryWidget = this;
+				Tile->Position = FIntVector2D(i, j);
+			}
 		}
 	}
 }
 
 void UInventoryBaseWidget::AddItem(UItemData* ItemData, FIntVector2D Position)
 {
-	auto* Item = CreateWidget(GetOwningPlayer(), ItemWidget);
-	UCanvasPanelSlot* CanvasItem = CanvasPanel->AddChildToCanvas(Item);
+	UItemBaseWidget* Item = CreateWidget<UItemBaseWidget>(GetOwningPlayer(), ItemWidget);
+	UCanvasPanelSlot* CanvasItem = CanvasItems->AddChildToCanvas(Item);
 	CanvasItem->SetAutoSize(true);
 	CanvasItem->SetPosition(FVector2D(Position.X,Position.Y)*100);
+	Item->Position = Position;
+	Item->ItemData = ItemData;
+	Item->InventoryWidget = this;
+	Item->Initialize();
 }
 
 void UInventoryBaseWidget::ToggleInventory(bool bOpen)
 {
 	EUMGSequencePlayMode::Type PlayMode = bOpen ? EUMGSequencePlayMode::Forward : EUMGSequencePlayMode::Reverse;
-	PlayAnimation(FadeAnimation, 0.0f, 1, PlayMode);
-	GetOwningPlayer()->SetIgnoreLookInput(true);
-	GetOwningPlayer()->bShowMouseCursor = true;
+	PlayAnimation(FadeInAnim, 0.0f, 1, PlayMode);
+	if (GetOwningPlayer())
+	{
+		GetOwningPlayer()->SetIgnoreLookInput(true);
+		GetOwningPlayer()->bShowMouseCursor = true;
+	}
 
 	if (bOpen)
 	{
@@ -44,7 +58,7 @@ void UInventoryBaseWidget::ToggleInventory(bool bOpen)
 
 void UInventoryBaseWidget::ReconstructItems()
 {
-	CanvasPanel->ClearChildren();
+	CanvasItems->ClearChildren();
 	for(int i = 0; i < InventoryReference->Inventory.Num(); i++)
 	{
 		FSlotData SlotData = InventoryReference->Inventory[i];
