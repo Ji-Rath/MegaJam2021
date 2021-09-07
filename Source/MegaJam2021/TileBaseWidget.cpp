@@ -10,6 +10,8 @@
 
 bool UTileBaseWidget::OnPlaceItem(FGeometry Geometry, FPointerEvent PointerEvent, UDragDropOperation* Operation)
 {
+	bool bSuccess = false;
+
 	if (ensure(Operation && IsValid(Operation->Payload) && InventoryWidget))
 	{
 		// Retrieve payload from drag drop operation
@@ -23,33 +25,38 @@ bool UTileBaseWidget::OnPlaceItem(FGeometry Geometry, FPointerEvent PointerEvent
 
 			if (ensure(ItemWidget && OtherInventoryComp && ItemWidget->ItemData && InventoryComp))
 			{
+				// Clear space from old inventory
+				TArray<FIntVector2D> SpaceTaken = OtherInventoryComp->GetSpaceTaken(ItemWidget->ItemData->Size, ItemWidget->Position);
+				OtherInventoryComp->SetOccupied(false, SpaceTaken);
+
 				// Ensure the inventory that we are dropping the item to has space
 				bool bHasSpace = InventoryComp->HasAvailableSpace(Position, ItemWidget->ItemData->Size);
 				if (bHasSpace)
 				{
-					// Clear space from old inventory
-					TArray<FIntVector2D> SpaceTaken = OtherInventoryComp->GetSpaceTaken(ItemWidget->ItemData->Size, ItemWidget->Position);
-					OtherInventoryComp->SetOccupied(false, SpaceTaken);
-
 					// Occupy new space
 					SpaceTaken = InventoryComp->GetSpaceTaken(ItemWidget->ItemData->Size, Position);
 					InventoryComp->SetOccupied(true, SpaceTaken);
 
-					// Update widget position value
-					ItemWidget->Position = Position;
-
 					// Update Inventory array
 					int InvIndex = InventoryComp->PosToIndex(Position);
-					InventoryComp->Inventory[InvIndex] = FSlotData(ItemWidget->ItemData, false);
+					InventoryComp->Inventory[InvIndex] = FSlotData(ItemWidget->ItemData, true);
+
+					// Update widget position value
+					ItemWidget->Position = Position;
 
 					// Reconstruct inventory UI
 					InventoryWidget->ReconstructItems();
 					ItemWidget->InventoryWidget->ReconstructItems();
 
-					return true;
+					bSuccess = true;
+				}
+				else
+				{
+					OtherInventoryComp->SetOccupied(true, SpaceTaken);
 				}
 			}
 		}
 	}
-	return false;
+
+	return bSuccess;
 }
