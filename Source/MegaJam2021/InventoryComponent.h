@@ -8,9 +8,10 @@
 #include "InventoryComponent.generated.h"
 
 class UGridPanel;
+class APlayerController;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FItemAdded, UItemData*, Item, FIntVector2D, Position);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FToggleInventory, bool, bOpen);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FToggleInventory, bool, bOpen, APlayerController*, Interactor);
 
 UCLASS(Blueprintable, ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class MEGAJAM2021_API UInventoryComponent : public UActorComponent

@@ -44,8 +44,13 @@ void UInventoryBaseWidget::AddItem(UItemData* ItemData, FIntVector2D Position)
 	CanvasItem->SetPosition(FVector2D(Position.X, Position.Y) * 100);
 }
 
-void UInventoryBaseWidget::ToggleInventory(bool bOpen)
+void UInventoryBaseWidget::ToggleInventory(bool bOpen, APlayerController* Interactor)
 {
+	if (Interactor)
+	{
+		SetOwningPlayer(Interactor);
+	}
+
 	// Set inventory visibility
 	EUMGSequencePlayMode::Type PlayMode = bOpen ? EUMGSequencePlayMode::Forward : EUMGSequencePlayMode::Reverse;
 	PlayAnimation(FadeInAnim, 0.0f, 1, PlayMode);
@@ -53,8 +58,18 @@ void UInventoryBaseWidget::ToggleInventory(bool bOpen)
 	// Show mouse cursor and ignore look input
 	if (GetOwningPlayer())
 	{
-		GetOwningPlayer()->SetIgnoreLookInput(true);
-		GetOwningPlayer()->bShowMouseCursor = true;
+		GetOwningPlayer()->SetIgnoreLookInput(bOpen);
+		bool bInputIgnored = GetOwningPlayer()->IsLookInputIgnored();
+		GetOwningPlayer()->bShowMouseCursor = bInputIgnored;
+		if (bInputIgnored)
+		{
+			GetOwningPlayer()->SetInputMode(FInputModeGameAndUI());
+		}
+		else
+		{
+			GetOwningPlayer()->SetInputMode(FInputModeGameOnly());
+		}
+		
 	}
 
 	// If the inventory is opened, reconstruct item widgets
@@ -89,8 +104,8 @@ bool UInventoryBaseWidget::Initialize()
 		if (InventoryReference)
 		{
 			InventoryReference->OnItemAdded.AddDynamic(this, &UInventoryBaseWidget::AddItem);
-			ConstructGrid(InventoryReference->InventorySize);
 			InventoryReference->OnToggleInventory.AddDynamic(this, &UInventoryBaseWidget::ToggleInventory);
+			ConstructGrid(InventoryReference->InventorySize);
 		}
 	}
 

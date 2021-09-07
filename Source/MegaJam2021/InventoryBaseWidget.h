@@ -32,7 +32,7 @@ public:
 	void AddItem(UItemData* ItemData, FIntVector2D Position);
 
 	UFUNCTION(BlueprintCallable)
-	void ToggleInventory(bool bOpen);
+	void ToggleInventory(bool bOpen, APlayerController* Interactor);
 
 	UFUNCTION(BlueprintCallable)
 	void ReconstructItems();
