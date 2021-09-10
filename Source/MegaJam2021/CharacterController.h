@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "GenericTeamAgentInterface.h"
+#include "GameFramework/PlayerInput.h"
+#include "SettingsSaveGame.h"
 #include "CharacterController.generated.h"
 
 /**
@@ -18,4 +20,18 @@ class MEGAJAM2021_API ACharacterController : public APlayerController
 protected:
 	void BeginPlay() override;
 
+public:
+	void InitInputSystem() override;
+
+	UFUNCTION()
+	void UpdateActionKey(FInputActionKeyMapping NewActionKey);
+
+	UFUNCTION()
+	void UpdateAxisKey(FInputAxisKeyMapping NewAxisKey);
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	UPlayerInput* GetPlayerInput() const;
+
+	UFUNCTION()
+	void ResetKeyBindings();
 };
