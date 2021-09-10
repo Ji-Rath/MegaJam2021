@@ -23,7 +23,7 @@ public:
 	static FInputAxisKeyMapping GetAxisKeyMapping(UPlayerInput* PlayerInput, FName AxisName, float Scale);
 
 	UFUNCTION(BlueprintCallable, BlueprintPure)
-	static FInputActionKeyMapping GetActionKeyMapping(UPlayerInput* PlayerInput, FName AxisName);
+	static FInputActionKeyMapping GetActionKeyMapping(UPlayerInput* PlayerInput, FName ActionName);
 
 	USaveGame* GetGameSave(FString SlotName, UClass* SaveType);
 

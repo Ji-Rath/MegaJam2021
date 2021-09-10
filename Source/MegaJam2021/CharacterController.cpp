@@ -41,6 +41,8 @@ void ACharacterController::UpdateKeyBindings(TArray<FInputAxisKeyMapping> AxisMa
 
 		// Add new axis mapping
 		PlayerInput->AddAxisMapping(AxisKey);
+
+		PlayerInput->ForceRebuildingKeyMaps(false);
 	}
 }
 
@@ -54,6 +56,8 @@ void ACharacterController::UpdateKeyBindings(TArray<FInputActionKeyMapping> Acti
 
 		// Add new action mapping
 		PlayerInput->AddActionMapping(ActionKey);
+
+		PlayerInput->ForceRebuildingKeyMaps(false);
 	}
 }
 

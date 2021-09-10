@@ -16,17 +16,6 @@ FInputAxisKeyMapping USaveGameSubsystem::GetAxisKeyMapping(UPlayerInput* PlayerI
 		}
 	}
 
-	UInputSettings* InputSettings = UInputSettings::GetInputSettings();
-	TArray<FInputAxisKeyMapping> AxisMappings;
-	InputSettings->GetAxisMappingByName(AxisName, AxisMappings);
-	for (FInputAxisKeyMapping AxisKey : AxisMappings)
-	{
-		if (AxisKey.Scale == Scale)
-		{
-			return AxisKey;
-		}
-	}
-
 	return FInputAxisKeyMapping();
 }
 
@@ -41,21 +30,12 @@ FInputActionKeyMapping USaveGameSubsystem::GetActionKeyMapping(UPlayerInput* Pla
 		}
 	}
 
-	UInputSettings* InputSettings = UInputSettings::GetInputSettings();
-	TArray<FInputActionKeyMapping> ActionMappings;
-	InputSettings->GetActionMappingByName(ActionName, ActionMappings);
-	for (FInputActionKeyMapping ActionKey : ActionMappings)
-	{
-		return ActionKey;
-	}
-
 	return FInputActionKeyMapping();
 }
 
 void USaveGameSubsystem::RebindAxisMap(FName AxisName, float Scale, FInputChord NewKey)
 {
 	FInputAxisKeyMapping RebindedAxisMapping = FInputAxisKeyMapping(AxisName, NewKey.Key, Scale);
-	SaveSettings = GetGameSave<USettingsSaveGame>("Settings");
 
 	if (ensure(SaveSettings))
 	{
@@ -65,6 +45,11 @@ void USaveGameSubsystem::RebindAxisMap(FName AxisName, float Scale, FInputChord 
 		// Remove existing axis key
 		for (FInputAxisKeyMapping AxisKey : CurrentAxisKeys)
 		{
+			if (AxisKey == RebindedAxisMapping || AxisKey.Key == EKeys::Invalid)
+			{
+				return;
+			}
+
 			if (AxisKey.AxisName == RebindedAxisMapping.AxisName && AxisKey.Scale == RebindedAxisMapping.Scale)
 			{
 				RemoveAxisKeys.Add(AxisKey);
@@ -101,7 +86,6 @@ void USaveGameSubsystem::RebindAxisMap(FName AxisName, float Scale, FInputChord 
 void USaveGameSubsystem::RebindActionMap(FName ActionName, FInputChord NewKey)
 {
 	FInputActionKeyMapping RebindedActionMapping(ActionName, NewKey.Key);
-	SaveSettings = GetGameSave<USettingsSaveGame>("Settings");
 
 	if (ensure(SaveSettings))
 	{
@@ -111,6 +95,11 @@ void USaveGameSubsystem::RebindActionMap(FName ActionName, FInputChord NewKey)
 		// Remove current action key
 		for (FInputActionKeyMapping ActionKey : CurrentActionKeys)
 		{
+			if (ActionKey == RebindedActionMapping || ActionKey.Key == EKeys::Invalid)
+			{
+				return;
+			}
+
 			if (ActionKey.ActionName == RebindedActionMapping.ActionName)
 			{
 				RemoveActionKeys.Add(ActionKey);
@@ -153,7 +142,6 @@ void USaveGameSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 
 void USaveGameSubsystem::ResetKeyBindings()
 {
-	SaveSettings = GetGameSave<USettingsSaveGame>("Settings");
 	if (ensure(SaveSettings))
 	{
 		SaveSettings->ModifiedAxisKeys.Empty();
@@ -170,8 +158,7 @@ void USaveGameSubsystem::ResetKeyBindings()
 			// Update character controller input bindings
 			if (IsValid(PlayerController))
 			{
-				PlayerController->UpdateKeyBindings(SaveSettings->ModifiedAxisKeys);
-				PlayerController->UpdateKeyBindings(SaveSettings->ModifiedActionKeys);
+				PlayerController->PlayerInput->ForceRebuildingKeyMaps(true);
 			}
 		}
 
