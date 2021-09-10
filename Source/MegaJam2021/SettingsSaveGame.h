@@ -29,4 +29,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	TArray<FInputAxisKeyMapping> GetModifiedAxisKeys();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bToggleCrouch = false;
 };
