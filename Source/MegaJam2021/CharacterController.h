@@ -23,7 +23,9 @@ protected:
 public:
 	void InitInputSystem() override;
 
-	void UpdateKeyBindings(TArray<FControlSaveSettings> ControlBindings);
+	void UpdateKeyBindings(TArray<FInputActionKeyMapping> ActionMappings);
+
+	void UpdateKeyBindings(TArray<FInputAxisKeyMapping> AxisMappings);
 
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	UPlayerInput* GetPlayerInput() const;

@@ -5,6 +5,8 @@
 #include "GameFramework/SaveGame.h"
 #include "SettingsSaveGame.h"
 #include "Kismet/GameplayStatics.h"
+#include "GameFramework/PlayerInput.h"
+#include "SaveGameSubsystem.h"
 
 
 
@@ -22,34 +24,36 @@ void ACharacterController::InitInputSystem()
 	{
 		USaveGame* GameSave = UGameplayStatics::LoadGameFromSlot("Settings", 0);
 		USettingsSaveGame* SettingsSave = Cast<USettingsSaveGame>(GameSave);
-		UpdateKeyBindings(SettingsSave->SaveControls);
+
+		UpdateKeyBindings(SettingsSave->GetModifiedAxisKeys());
+		UpdateKeyBindings(SettingsSave->GetModifiedActionKeys());
 	}
 
 }
 
-void ACharacterController::UpdateKeyBindings(TArray<FControlSaveSettings> ControlBindings)
+void ACharacterController::UpdateKeyBindings(TArray<FInputAxisKeyMapping> AxisMappings)
 {
-
-	for (FControlSaveSettings ControlSetting : ControlBindings)
+	for (FInputAxisKeyMapping AxisKey : AxisMappings)
 	{
-		if (ControlSetting.NewAxisMapping.AxisName != NAME_None)
-		{
-			// Remove axis mapping that has equivalent scale
-			FInputAxisKeyMapping OldAxisMapping = USettingsSaveGame::GetAxisKeyMapping(PlayerInput, ControlSetting.NewAxisMapping.AxisName, ControlSetting.NewAxisMapping.Scale);
-			PlayerInput->RemoveAxisMapping(OldAxisMapping);
+		// Remove axis mapping that has equivalent scale
+		FInputAxisKeyMapping OldAxisMapping = USaveGameSubsystem::GetAxisKeyMapping(PlayerInput, AxisKey.AxisName, AxisKey.Scale);
+		PlayerInput->RemoveAxisMapping(OldAxisMapping);
 
-			// Add new axis mapping
-			PlayerInput->AddAxisMapping(ControlSetting.NewAxisMapping);
-		}
-		else if (ControlSetting.NewActionMapping.ActionName != NAME_None)
-		{
-			// Remove axis mapping that has equivalent scale
-			FInputActionKeyMapping OldActionMapping = USettingsSaveGame::GetActionKeyMapping(PlayerInput, ControlSetting.NewActionMapping.ActionName);
-			PlayerInput->RemoveActionMapping(OldActionMapping);
+		// Add new axis mapping
+		PlayerInput->AddAxisMapping(AxisKey);
+	}
+}
 
-			// Add new action mapping
-			PlayerInput->AddActionMapping(ControlSetting.NewActionMapping);
-		}
+void ACharacterController::UpdateKeyBindings(TArray<FInputActionKeyMapping> ActionMappings)
+{
+	for (FInputActionKeyMapping ActionKey : ActionMappings)
+	{
+		// Remove axis mapping that has equivalent scale
+		FInputActionKeyMapping OldActionMapping = USaveGameSubsystem::GetActionKeyMapping(PlayerInput, ActionKey.ActionName);
+		PlayerInput->RemoveActionMapping(OldActionMapping);
+
+		// Add new action mapping
+		PlayerInput->AddActionMapping(ActionKey);
 	}
 }
 

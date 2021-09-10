@@ -4,35 +4,12 @@
 #include "SettingsSaveGame.h"
 #include "GameFramework/PlayerInput.h"
 
-FText USettingsSaveGame::GetAxisKeyName(UPlayerInput* PlayerInput, FName AxisName, float Scale)
+TArray<FInputActionKeyMapping> USettingsSaveGame::GetModifiedActionKeys()
 {
-	return GetAxisKeyMapping(PlayerInput, AxisName, Scale).Key.GetDisplayName(false);
+	return ModifiedActionKeys;
 }
 
-FInputAxisKeyMapping USettingsSaveGame::GetAxisKeyMapping(UPlayerInput* PlayerInput, FName AxisName, float Scale)
+TArray<FInputAxisKeyMapping> USettingsSaveGame::GetModifiedAxisKeys()
 {
-	TArray<FInputAxisKeyMapping> OldMappings = PlayerInput->GetKeysForAxis(AxisName);
-	for (FInputAxisKeyMapping AxisKeyMapping : OldMappings)
-	{
-		if (AxisKeyMapping.Scale == Scale)
-		{
-			return AxisKeyMapping;
-		}
-	}
-
-	return FInputAxisKeyMapping();
-}
-
-FInputActionKeyMapping USettingsSaveGame::GetActionKeyMapping(UPlayerInput* PlayerInput, FName ActionName)
-{
-	TArray<FInputActionKeyMapping> OldMappings = PlayerInput->GetKeysForAction(ActionName);
-	for (FInputActionKeyMapping ActionKeyMapping : OldMappings)
-	{
-		if (ActionKeyMapping.ActionName == ActionName)
-		{
-			return ActionKeyMapping;
-		}
-	}
-
-	return FInputActionKeyMapping();
+	return ModifiedAxisKeys;
 }

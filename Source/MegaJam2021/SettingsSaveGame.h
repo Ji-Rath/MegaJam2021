@@ -9,38 +9,6 @@
 
 class UPlayerInput;
 
-USTRUCT(Blueprintable)
-struct FControlSaveSettings
-{
-	GENERATED_USTRUCT_BODY();
-
-	// Save Axis mapping
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FInputAxisKeyMapping NewAxisMapping;
-
-	// Save Action mapping
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FInputActionKeyMapping NewActionMapping;
-
-	FControlSaveSettings() {};
-
-	FControlSaveSettings(FInputActionKeyMapping ActionMapping)
-	{
-		NewActionMapping = ActionMapping;
-	}
-
-	FControlSaveSettings(FInputAxisKeyMapping AxisMapping)
-	{
-		NewAxisMapping = AxisMapping;
-	}
-
-	bool operator==(const FControlSaveSettings& Other) const
-	{
-		return (	NewAxisMapping == Other.NewAxisMapping
-				|| NewActionMapping == Other.NewActionMapping);
-	}
-};
-
 /**
  * 
  */
@@ -51,14 +19,14 @@ class MEGAJAM2021_API USettingsSaveGame : public USaveGame
 	
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TArray<FControlSaveSettings> SaveControls;
+	TArray<FInputActionKeyMapping> ModifiedActionKeys;
 
-	UFUNCTION(BlueprintCallable, BlueprintPure)
-	static FText GetAxisKeyName(UPlayerInput* PlayerInput, FName AxisName, float Scale);
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<FInputAxisKeyMapping> ModifiedAxisKeys;
 
-	UFUNCTION(BlueprintCallable, BlueprintPure)
-	static FInputAxisKeyMapping GetAxisKeyMapping(UPlayerInput* PlayerInput, FName AxisName, float Scale);
+	UFUNCTION(BlueprintCallable)
+	TArray<FInputActionKeyMapping> GetModifiedActionKeys();
 
-	UFUNCTION(BlueprintCallable, BlueprintPure)
-	static FInputActionKeyMapping GetActionKeyMapping(UPlayerInput* PlayerInput, FName AxisName);
+	UFUNCTION(BlueprintCallable)
+	TArray<FInputAxisKeyMapping> GetModifiedAxisKeys();
 };
