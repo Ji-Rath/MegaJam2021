@@ -23,11 +23,15 @@ protected:
 public:
 	void InitInputSystem() override;
 
-	void UpdateKeyBindings(TArray<FInputActionKeyMapping> ActionMappings);
+	UFUNCTION()
+	void UpdateActionKey(FInputActionKeyMapping NewActionKey);
 
-	void UpdateKeyBindings(TArray<FInputAxisKeyMapping> AxisMappings);
+	UFUNCTION()
+	void UpdateAxisKey(FInputAxisKeyMapping NewAxisKey);
 
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	UPlayerInput* GetPlayerInput() const;
 
+	UFUNCTION()
+	void ResetKeyBindings();
 };

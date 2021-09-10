@@ -11,6 +11,7 @@ class UPlayerInput;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FActionKeyChanged, FInputActionKeyMapping, NewKey);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FAxisKeyChanged, FInputAxisKeyMapping, NewKey);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FResetBindings);
 
 UCLASS()
 class MEGAJAM2021_API USaveGameSubsystem : public UGameInstanceSubsystem
@@ -51,6 +52,9 @@ public:
 
 	UPROPERTY(BlueprintAssignable)
 	FAxisKeyChanged OnAxisKeyChanged;
+
+	UPROPERTY(BlueprintAssignable)
+	FResetBindings OnResetBindings;
 
 	void Initialize(FSubsystemCollectionBase& Collection) override;
 

@@ -67,18 +67,6 @@ void USaveGameSubsystem::RebindAxisMap(FName AxisName, float Scale, FInputChord 
 		// Save settings
 		UGameplayStatics::SaveGameToSlot(SaveSettings, "Settings", 0);
 
-		// Iterate over all character controllers
-		for (TActorIterator<ACharacterController> ActorItr(GetWorld()); ActorItr; ++ActorItr)
-		{
-			ACharacterController* PlayerController = *ActorItr;
-
-			// Update character controller input bindings
-			if (IsValid(PlayerController))
-			{
-				PlayerController->UpdateKeyBindings(CurrentAxisKeys);
-			}
-		}
-
 		OnAxisKeyChanged.Broadcast(RebindedAxisMapping);
 	}
 }
@@ -117,18 +105,6 @@ void USaveGameSubsystem::RebindActionMap(FName ActionName, FInputChord NewKey)
 		// Save settings
 		UGameplayStatics::SaveGameToSlot(SaveSettings, "Settings", 0);
 
-		// Iterate over all character controllers
-		for (TActorIterator<ACharacterController> ActorItr(GetWorld()); ActorItr; ++ActorItr)
-		{
-			ACharacterController* PlayerController = *ActorItr;
-
-			// Update character controller input bindings
-			if (IsValid(PlayerController))
-			{
-				PlayerController->UpdateKeyBindings(CurrentActionKeys);
-			}
-		}
-
 		OnActionKeyChanged.Broadcast(RebindedActionMapping);
 	}
 }
@@ -150,20 +126,7 @@ void USaveGameSubsystem::ResetKeyBindings()
 		// Save settings
 		UGameplayStatics::SaveGameToSlot(SaveSettings, "Settings", 0);
 
-		// Iterate over all character controllers
-		for (TActorIterator<ACharacterController> ActorItr(GetWorld()); ActorItr; ++ActorItr)
-		{
-			ACharacterController* PlayerController = *ActorItr;
-
-			// Update character controller input bindings
-			if (IsValid(PlayerController))
-			{
-				PlayerController->PlayerInput->ForceRebuildingKeyMaps(true);
-			}
-		}
-
-		OnActionKeyChanged.Broadcast(FInputActionKeyMapping());
-		OnAxisKeyChanged.Broadcast(FInputAxisKeyMapping());
+		OnResetBindings.Broadcast();
 	}
 }
 
