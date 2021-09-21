@@ -139,7 +139,7 @@ USaveGame* USaveGameSubsystem::GetGameSave(FString SlotName, UClass* SaveType)
 	}
 	else
 	{
-		return UGameplayStatics::CreateSaveGameObject(SaveType->StaticClass());
+		return UGameplayStatics::CreateSaveGameObject(SaveType);
 	}
 }
 
