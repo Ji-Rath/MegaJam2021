@@ -23,7 +23,5 @@ void AEnemyCharacter::ActorHit(AActor* SelfActor, AActor* OtherActor, FVector No
 
 		FAINoiseEvent SightEvent(OtherActor, Hit.Location);
 		PerceptionSystem->OnEvent(SightEvent);
-
-		UE_LOG(LogTemp, Warning, TEXT("Sent touch event!"));
 	}
 }
