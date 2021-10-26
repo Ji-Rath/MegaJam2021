@@ -74,6 +74,10 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "AI")
 	float StopSearchingTime = 10.f;
 
+	/** Range that will alert nearby AI of the players presence */
+	UPROPERTY(EditDefaultsOnly, Category = "AI")
+	float CallBackupRange = 1000.f;
+
 	UAIPerceptionComponent* GetPerceptionComponent();
 
 	UPROPERTY(VisibleAnywhere)

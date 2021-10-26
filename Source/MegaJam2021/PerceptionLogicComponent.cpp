@@ -7,6 +7,10 @@
 #include "Perception/AISense_Sight.h"
 #include "Perception/AISense_Hearing.h"
 #include "BehaviorTree/BlackboardComponent.h"
+#include "Perception/AISense_Team.h"
+#include "GenericTeamAgentInterface.h"
+#include "MissingItem.h"
+#include "Perception/AIPerceptionStimuliSourceComponent.h"
 
 
 void UPerceptionLogicComponent::BeginPlay()
@@ -31,6 +35,7 @@ void UPerceptionLogicComponent::PerceptionUpdated(AActor* Actor, FAIStimulus Sti
 	const FAISenseID SenseID = Stimulus.Type;
 	const FAISenseID SightID = UAISense::GetSenseID(UAISense_Sight::StaticClass());
 	const FAISenseID HearingID = UAISense::GetSenseID(UAISense_Hearing::StaticClass());
+	const FAISenseID TeamSenseID = UAISense::GetSenseID(UAISense_Team::StaticClass());
 	
 	/** Sight stimulus */
 	if (SenseID == SightID)
@@ -40,6 +45,12 @@ void UPerceptionLogicComponent::PerceptionUpdated(AActor* Actor, FAIStimulus Sti
 
 	/** Hearing stimulus */
 	if (SenseID == HearingID)
+	{
+		HearingUpdated(Stimulus);
+	}
+
+	/* Team sense stimulus (Same as hearing stimulus) */
+	if (SenseID == TeamSenseID)
 	{
 		HearingUpdated(Stimulus);
 	}
@@ -62,19 +73,63 @@ void UPerceptionLogicComponent::SightUpdated(FAIStimulus& Stimulus, AActor* Acto
 {
 	if (!BlackboardComponent) { return; }
 
-	if (Stimulus.WasSuccessfullySensed())
+	/* Determine AI attitude of sensed actor */
+	ETeamAttitude::Type Attitude = ETeamAttitude::Neutral;
+	if (AController* Owner = GetOwner<AController>())
 	{
-		PlayerReference = Actor;
-		SetState(Chasing);
-		GetBlackboardComponent()->SetValueAsObject(BBPlayerReference, PlayerReference);
-
-		// Clear timer that would cause the enemy to automatically search
-		if (GetWorld()->GetTimerManager().IsTimerActive(ForgetTargetTimer))
+		auto* TeamInterface = Cast<IGenericTeamAgentInterface>(Owner);
+		if (TeamInterface)
 		{
-			GetWorld()->GetTimerManager().ClearTimer(ForgetTargetTimer);
+			Attitude = TeamInterface->GetTeamAttitudeTowards(*Actor);
 		}
 	}
-	else
+
+	/* Hostile detected */
+	if (Attitude == ETeamAttitude::Hostile)
+	{
+		if (Stimulus.WasSuccessfullySensed())
+		{
+			PlayerReference = Actor;
+			SetState(Chasing);
+			GetBlackboardComponent()->SetValueAsObject(BBPlayerReference, PlayerReference);
+
+			// Clear timer that would cause the enemy to automatically search
+			if (GetWorld()->GetTimerManager().IsTimerActive(ForgetTargetTimer))
+			{
+				GetWorld()->GetTimerManager().ClearTimer(ForgetTargetTimer);
+			}
+
+			/* Alert nearby AI that player was found */
+			UAIPerceptionSystem* PerceptionSystem = UAIPerceptionSystem::GetCurrent(GetWorld());
+			if (PerceptionSystem)
+			{
+				FAITeamStimulusEvent TeamStimEvent(GetOwner(), Actor, Actor->GetActorLocation(), CallBackupRange);
+				PerceptionSystem->OnEvent(TeamStimEvent);
+			}
+		}
+	}
+
+	/* Neutral actor detected */
+	if (Attitude == ETeamAttitude::Neutral)
+	{
+		if (Stimulus.WasSuccessfullySensed())
+		{
+			/* If an item has gone missing, search the area and destroy missing item (using hearing logic) */
+			if (Cast<AMissingItem>(Actor))
+			{
+				HearingUpdated(Stimulus);
+				UAIPerceptionStimuliSourceComponent* StimSource = Actor->FindComponentByClass<UAIPerceptionStimuliSourceComponent>();
+				if (StimSource)
+				{
+					StimSource->UnregisterFromSense(UAISense_Sight::StaticClass());
+				}
+				//Actor->Destroy();
+			}
+		}
+	}
+
+	/* If the stimulus was 'lost', set a timer to begin searching */
+	if (!Stimulus.WasSuccessfullySensed())
 	{
 		FTimerDelegate TimerDelegate;
 		TimerDelegate.BindUFunction(this, FName("SetState"), Searching);
@@ -89,15 +144,25 @@ void UPerceptionLogicComponent::SetState(EEnemyState NewState)
 	EnemyState = NewState;
 	GetBlackboardComponent()->SetValueAsEnum(BBEnemyState, (uint8) EnemyState);
 
-	// Update search location
-	if (NewState == Searching && PlayerReference && ensure(GetBlackboardComponent()))
+	if (NewState == Searching)
 	{
-		GetBlackboardComponent()->SetValueAsVector(BBSearchLocation, PlayerReference->GetActorLocation());
-		GetBlackboardComponent()->SetValueAsVector(BBDestination, PlayerReference->GetActorLocation());
-
+		/* Update search location to be on player (kinda cheating) */
+		if (PlayerReference)
+		{
+			GetBlackboardComponent()->SetValueAsVector(BBSearchLocation, PlayerReference->GetActorLocation());
+			GetBlackboardComponent()->SetValueAsVector(BBDestination, PlayerReference->GetActorLocation());
+		}
+		
+		/* Give up searching after set time */
 		FTimerDelegate TimerDelegate;
 		TimerDelegate.BindUFunction(this, FName("SetState"), Idle);
 		GetWorld()->GetTimerManager().SetTimer(ForgetTargetTimer, TimerDelegate, StopSearchingTime, false);
+
+		/**
+		 * Gradually increase search time
+		 * @todo Give BP's edit access to hard coded values
+		 */
+		StopSearchingTime = FMath::Clamp<float>(StopSearchingTime + 5.f, 0, 30.f);
 	}
 
 	OnStateUpdated.Broadcast(NewState);
