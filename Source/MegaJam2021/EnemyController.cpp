@@ -2,21 +2,13 @@
 
 
 
-void AEnemyController::BeginPlay()
+AEnemyController::AEnemyController()
 {
-	Super::BeginPlay();
-	
 	// Teams setup
 	SetGenericTeamId(FGenericTeamId(TeamID));
 }
 
-
-void AEnemyController::SetGenericTeamId(const FGenericTeamId& NewTeamID)
+void AEnemyController::BeginPlay()
 {
-	Team = NewTeamID;
-}
-
-FGenericTeamId AEnemyController::GetGenericTeamId() const
-{
-	return Team;
+	Super::BeginPlay();
 }

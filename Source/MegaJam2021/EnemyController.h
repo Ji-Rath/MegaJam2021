@@ -13,15 +13,10 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "Team")
 	uint8 TeamID = FGenericTeamId::NoTeam;
 
+	AEnemyController();
+
 protected:
 	void BeginPlay() override;
-
-private:
-	void SetGenericTeamId(const FGenericTeamId& NewTeamID) override;
-
-	FGenericTeamId GetGenericTeamId() const override;
-
-	FGenericTeamId Team;
 };
 
 
