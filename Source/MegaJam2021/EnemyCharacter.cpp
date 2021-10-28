@@ -9,7 +9,7 @@
 void AEnemyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 	OnActorHit.AddDynamic(this, &AEnemyCharacter::ActorHit);
 }
 
@@ -23,7 +23,20 @@ void AEnemyCharacter::ActorHit(AActor* SelfActor, AActor* OtherActor, FVector No
 
 		FAINoiseEvent SightEvent(OtherActor, Hit.Location);
 		PerceptionSystem->OnEvent(SightEvent);
-
-		UE_LOG(LogTemp, Warning, TEXT("Sent touch event!"));
 	}
+}
+
+AEnemyCharacter::AEnemyCharacter()
+{
+	SetGenericTeamId(FGenericTeamId(TeamID));
+}
+
+void AEnemyCharacter::SetGenericTeamId(const FGenericTeamId& NewTeamID)
+{
+	Team = NewTeamID;
+}
+
+FGenericTeamId AEnemyCharacter::GetGenericTeamId() const
+{
+	return Team;
 }
