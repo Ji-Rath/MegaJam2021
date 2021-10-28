@@ -46,17 +46,17 @@ void UPerceptionLogicComponent::PerceptionUpdated(AActor* Actor, FAIStimulus Sti
 	/** Hearing stimulus */
 	if (SenseID == HearingID)
 	{
-		HearingUpdated(Stimulus);
+		HearingUpdated(Actor, Stimulus);
 	}
 
 	/* Team sense stimulus (Same as hearing stimulus) */
 	if (SenseID == TeamSenseID)
 	{
-		HearingUpdated(Stimulus);
+		HearingUpdated(Actor, Stimulus);
 	}
 }
 
-void UPerceptionLogicComponent::HearingUpdated(FAIStimulus& Stimulus)
+void UPerceptionLogicComponent::HearingUpdated(AActor* Actor, FAIStimulus& Stimulus)
 {
 	if (!BlackboardComponent) { return; }
 
@@ -73,16 +73,7 @@ void UPerceptionLogicComponent::SightUpdated(FAIStimulus& Stimulus, AActor* Acto
 {
 	if (!BlackboardComponent) { return; }
 
-	/* Determine AI attitude of sensed actor */
-	ETeamAttitude::Type Attitude = ETeamAttitude::Neutral;
-	if (AController* Owner = GetOwner<AController>())
-	{
-		auto* TeamInterface = Cast<IGenericTeamAgentInterface>(Owner);
-		if (TeamInterface)
-		{
-			Attitude = TeamInterface->GetTeamAttitudeTowards(*Actor);
-		}
-	}
+	ETeamAttitude::Type Attitude = GetAttitudeTowards(Actor);
 
 	/* Hostile detected */
 	if (Attitude == ETeamAttitude::Hostile)
@@ -107,6 +98,13 @@ void UPerceptionLogicComponent::SightUpdated(FAIStimulus& Stimulus, AActor* Acto
 				PerceptionSystem->OnEvent(TeamStimEvent);
 			}
 		}
+		else
+		{
+			/* If the stimulus was 'lost', set a timer to begin searching */
+			FTimerDelegate TimerDelegate;
+			TimerDelegate.BindUFunction(this, FName("SetState"), Searching);
+			GetWorld()->GetTimerManager().SetTimer(ForgetTargetTimer, TimerDelegate, ForgetTargetTime, false);
+		}
 	}
 
 	/* Neutral actor detected */
@@ -117,24 +115,31 @@ void UPerceptionLogicComponent::SightUpdated(FAIStimulus& Stimulus, AActor* Acto
 			/* If an item has gone missing, search the area and destroy missing item (using hearing logic) */
 			if (Cast<AMissingItem>(Actor))
 			{
-				HearingUpdated(Stimulus);
-				UAIPerceptionStimuliSourceComponent* StimSource = Actor->FindComponentByClass<UAIPerceptionStimuliSourceComponent>();
-				if (StimSource)
-				{
-					StimSource->UnregisterFromSense(UAISense_Sight::StaticClass());
-				}
-				//Actor->Destroy();
+				HearingUpdated(Actor, Stimulus);
 			}
+		}
+		else
+		{
+			Actor->Destroy();
+			Stimulus.MarkNoLongerSensed();
+		}
+	}
+}
+
+ETeamAttitude::Type UPerceptionLogicComponent::GetAttitudeTowards(AActor* Actor)
+{
+	/* Determine AI attitude of sensed actor */
+	ETeamAttitude::Type Attitude = ETeamAttitude::Neutral;
+	if (AController* Owner = GetOwner<AController>())
+	{
+		auto* TeamInterface = Cast<IGenericTeamAgentInterface>(Owner);
+		if (TeamInterface)
+		{
+			Attitude = TeamInterface->GetTeamAttitudeTowards(*Actor);
 		}
 	}
 
-	/* If the stimulus was 'lost', set a timer to begin searching */
-	if (!Stimulus.WasSuccessfullySensed())
-	{
-		FTimerDelegate TimerDelegate;
-		TimerDelegate.BindUFunction(this, FName("SetState"), Searching);
-		GetWorld()->GetTimerManager().SetTimer(ForgetTargetTimer, TimerDelegate, ForgetTargetTime, false);
-	}
+	return Attitude;
 }
 
 void UPerceptionLogicComponent::SetState(EEnemyState NewState)

@@ -37,10 +37,12 @@ public:
 	void PerceptionUpdated(AActor* Actor, FAIStimulus Stimulus);
 
 	UFUNCTION()
-	void HearingUpdated(FAIStimulus& Stimulus);
+	void HearingUpdated(AActor* Actor, FAIStimulus& Stimulus);
 
 	UFUNCTION()
 	void SightUpdated(FAIStimulus& Stimulus, AActor* Actor);
+
+	ETeamAttitude::Type GetAttitudeTowards(AActor* Actor);
 
 	/** The current state of the enemy */
 	UPROPERTY(VisibleAnywhere, Category = "AI")
