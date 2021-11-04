@@ -38,13 +38,16 @@ void ACharacterController::InitInputSystem()
 		USaveGame* GameSave = UGameplayStatics::LoadGameFromSlot("Settings", 0);
 		USettingsSaveGame* SettingsSave = Cast<USettingsSaveGame>(GameSave);
 
-		for (FInputAxisKeyMapping AxisKey : SettingsSave->GetModifiedAxisKeys())
+		if (SettingsSave)
 		{
-			UpdateAxisKey(AxisKey);
-		}
-		for (FInputActionKeyMapping ActionKey : SettingsSave->GetModifiedActionKeys())
-		{
-			UpdateActionKey(ActionKey);
+			for (FInputAxisKeyMapping AxisKey : SettingsSave->GetModifiedAxisKeys())
+			{
+				UpdateAxisKey(AxisKey);
+			}
+			for (FInputActionKeyMapping ActionKey : SettingsSave->GetModifiedActionKeys())
+			{
+				UpdateActionKey(ActionKey);
+			}
 		}
 	}
 
