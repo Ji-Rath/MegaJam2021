@@ -4,3 +4,6 @@
 [submodule "Plugins/InteractionSystem"]
 	path = Plugins/InteractionSystem
 	url = https://github.com/Ji-Rath/UEInteractSystem
+[submodule "Plugins/SpatialInventory"]
+	path = Plugins/SpatialInventory
+	url = https://github.com/Ji-Rath/SpatialInventory
